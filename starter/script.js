@@ -58,26 +58,37 @@ Test data:
 
 
 // Calculate average score of the teams
-const dolphins1 = 23;
-const dolphins2 = 34;
-const dolphins3 = 89;
+// const dolphins1 = 23;
+// const dolphins2 = 34;
+// const dolphins3 = 89;
 
-const koalas1 = 88;
-const koalas2 = 3;
-const koalas3 = 7;
+// const koalas1 = 88;
+// const koalas2 = 3;
+// const koalas3 = 7;
 
-avg_dolphins = dolphins1 + dolphins2 + dolphins3  /3
-console.log(avg_dolphins)
+// avg_dolphins = dolphins1 + dolphins2 + dolphins3  /3
+// console.log(avg_dolphins)
 
-avg_koalas = koalas1 + koalas2 + koalas3 /3
-console.log(avg_koalas)
-
-
-if (avg_dolphins > avg_koalas && avg_dolphins > 100) {
-    console.log("Dolphin is the winner");
-} else if (avg_koalas > avg_dolphins && avg_koalas > 100) {
-    console.log("koalas is the winner");
-}else console.log("no oneis winner")
+// avg_koalas = koalas1 + koalas2 + koalas3 /3
+// console.log(avg_koalas)
 
 
- 
+// if (avg_dolphins > avg_koalas && avg_dolphins > 100) {
+//     console.log("Dolphin is the winner");
+// } else if (avg_koalas > avg_dolphins && avg_koalas > 100) {
+//     console.log("koalas is the winner");
+// }else console.log("no oneis winner")
+
+
+//tip calculator
+let bill = 30
+
+let tip = 0
+
+console.log(tip)
+bill >= 50 && bill <=300 ? tip = 15/100 * bill : tip = 0.2 * bill ;
+
+total = bill + tip
+console.log("Bill is "+ bill);
+console.log("Tip is " + tip);
+console.log("Total cost = " + total);
