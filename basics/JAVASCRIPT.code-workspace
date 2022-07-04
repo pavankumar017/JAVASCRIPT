@@ -1,0 +1,13 @@
+{
+  "folders": [
+	{
+		"path": ".."
+	},
+	{
+		"path": "../../complete-javascript-course-master/03-Developer-Skills/starter"
+	}
+],
+  "settings": {
+    "files.autoSave": "onWindowChange"
+  }
+}
