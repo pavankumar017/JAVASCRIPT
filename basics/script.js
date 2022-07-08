@@ -19,7 +19,6 @@ console.log(myAge , mySisAge);
 console.log("john" + "name");
 */
 
-
 /*
 Mark and John are trying to compare their BMI (Body Mass Index), which is calculated using the formula:
 BMI = mass / height ** 2 = mass / (height * height) (mass in kg and height in meter).
@@ -56,7 +55,6 @@ Test data:
 // const str3 = `im${str1}${str2}` ;//template literal
 // console.log(str3)
 
-
 // Calculate average score of the teams
 // const dolphins1 = 23;
 // const dolphins2 = 34;
@@ -72,23 +70,23 @@ Test data:
 // avg_koalas = koalas1 + koalas2 + koalas3 /3
 // console.log(avg_koalas)
 
-
 // if (avg_dolphins > avg_koalas && avg_dolphins > 100) {
 //     console.log("Dolphin is the winner");
 // } else if (avg_koalas > avg_dolphins && avg_koalas > 100) {
 //     console.log("koalas is the winner");
 // }else console.log("no oneis winner")
 
-
 //tip calculator
-let bill = 30
+let bill = 30;
 
-let tip = 0
+let tip = 0;
 
-console.log(tip)
-bill >= 50 && bill <=300 ? tip = 15/100 * bill : tip = 0.2 * bill ;
+console.log(tip);
+bill >= 50 && bill <= 300 ? (tip = (15 / 100) * bill) : (tip = 0.2 * bill);
 
-total = bill + tip
-console.log("Bill is "+ bill);
+total = bill + tip;
+console.log("Bill is " + bill);
 console.log("Tip is " + tip);
 console.log("Total cost = " + total);
+
+console.log("sds");

@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: rgb(205, 195, 50);
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 50px;
+}
+
+.first {
+  color: brown;
+}
+h1 {
+  margin-bottom: 25px;
+}
+h2 {
+  margin-top: 20px;
+}
+p {
+  margin-bottom: 20px;
+}
+
+#your-name {
+  color: rgb(137, 32, 218);
+  border: 5px solid #444;
+  width: 400px;
+  padding: 25px;
+}
+
+input,
+button {
+  padding: 10px;
+  font-size: 16px;
+}
