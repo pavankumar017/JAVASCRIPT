@@ -7,7 +7,14 @@
   border: none;
   border-radius: 5px /* to have smooth at border*/;
   cursor: pointer; /*given hand symbol when hovered on it */
+  transition: opacity 0.15s; /* transition is for smooth change of 1 style to other */
 }
+
+/*this is performed pnly on hover */
+.subscribe:hover {
+  opacity: 0.7;
+}
+
 .join {
   background-color: white;
   color: blueviolet;

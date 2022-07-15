@@ -44,7 +44,7 @@ document.querySelector('.check').addEventListener('click', function () {
     if (score > 1) {
       guess > secret_number
         ? display_message('Too High ')
-        : dispatchEvent('Too Low'); //using ternary operator
+        : display_message('Too Low'); //using ternary operator
       score = score - 1;
       document.querySelector('.score').textContent = score;
       console.log('sCORE' + score);
