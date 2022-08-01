@@ -130,7 +130,7 @@ const secure_book = function () {
   };
 };
 
-const booker = secure_book(); //this connection where it allows ro access function is called closure
-booker();
+const booker = secure_book(); //this connection where it allows to access function is called closure
+booker(); //booker has access to variable
 booker();
 booker();
