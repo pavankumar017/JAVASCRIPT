@@ -61,6 +61,96 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const display_movements = function (movements) {
+  containerMovements.innerHTML = '';
+
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const html = ` <div class="movements__row">
+          <div class="movements__type movements__type--deposit">${
+            i + 1
+          } ${type}</div>
+          <div class="movements__value">${mov}€ </div>
+        </div>`;
+
+    // adding a HTML block
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+//to display summary of deposits and withdrawals
+
+const calc_display_summary = function (full_acc) {
+  const incomes = full_acc.movements
+    .filter(val => val > 0)
+    .reduce((acc, val) => acc + val);
+  labelSumIn.textContent = `${incomes} €`;
+
+  const outcomes = full_acc.movements
+    .filter(val => val < 0)
+    .reduce((acc, val) => acc + val);
+  labelSumOut.textContent = `${Math.abs(outcomes)} €`;
+
+  const intrest = full_acc.movements
+    .filter(val => val > 0)
+    .map(int => (int * full_acc.interestRate) / 100)
+    .filter(int => int >= 1)
+    .reduce((acc, int) => acc + int);
+  labelSumInterest.textContent = `${intrest}€`;
+};
+
+//to display the balance
+const calc_balance_print = function (movements) {
+  const bal = movements.reduce((acc, val) => acc + val, 0);
+  labelBalance.textContent = `${bal} €`;
+}; //initiator value of acc}
+
+//compute user names:
+
+const user_name = function (full_name_arr) {
+  full_name_arr.forEach(function (acc) {
+    acc.user_name = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(word => word[0])
+      .join('');
+  });
+};
+
+user_name(accounts);
+console.log(accounts);
+
+//Event handler for login
+let current_account;
+
+btnLogin.addEventListener('click', function (e) {
+  //prevents from auto reload when clicked on button
+  e.preventDefault();
+  current_account = accounts.find(
+    current_account => current_account.user_name === inputLoginUsername.value
+  );
+  console.log(current_account);
+  if (current_account?.pin === Number(inputLoginPin.value)) {
+    //display ui and message
+    labelWelcome.textContent = `Welcome ${current_account.owner.split(' ')[0]}`;
+    containerApp.style.opacity = 100;
+
+    //clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+
+    //movments
+    display_movements(current_account.movements);
+    //display balance
+
+    calc_balance_print(current_account.movements);
+
+    //display summary
+
+    calc_display_summary(current_account);
+  }
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -72,5 +162,3 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-/////////////////////////////////////////////////
