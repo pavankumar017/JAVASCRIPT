@@ -40,10 +40,19 @@
 
 //coding challenge 3.with chaining methods
 
-const calc_av_human_age = dog_age =>
-  dog_age
-    .map(val => (val = val <= 2 ? 2 * val : 16 + 4 * val))
-    .filter(val => val >= 18)
-    .reduce((acc, val, i, arr) => acc + val / arr.length, 0);
+// const calc_av_human_age = dog_age =>
+//   dog_age
+//     .map(val => (val = val <= 2 ? 2 * val : 16 + 4 * val))
+//     .filter(val => val >= 18)
+//     .reduce((acc, val, i, arr) => acc + val / arr.length, 0);
 
-console.log(calc_av_human_age([[1, 2, 3, 34, 3]]));
+// console.log(calc_av_human_age([[1, 2, 3, 34, 3]]));
+
+//sort
+const move = [-123, -080, 878, 833, 564, -90];
+move.sort((a, b) => {
+  a - b;
+});
+console.log(move);
+console.log('hi');
+//op = [-080,-90,-123,564,833,878]

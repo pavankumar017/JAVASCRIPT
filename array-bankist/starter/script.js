@@ -61,6 +61,8 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+console.log('in login page');
+
 const display_movements = function (movements) {
   containerMovements.innerHTML = '';
 
@@ -101,11 +103,24 @@ const calc_display_summary = function (full_acc) {
 };
 
 //to display the balance
-const calc_balance_print = function (movements) {
-  const bal = movements.reduce((acc, val) => acc + val, 0);
+const calc_balance_print = function (full_acc) {
+  const bal = full_acc.movements.reduce((acc, val) => acc + val, 0);
+  full_acc.balance = bal;
   labelBalance.textContent = `${bal} €`;
 }; //initiator value of acc}
 
+//update UI based on movements
+const update_ui = function (acc) {
+  //movments
+  display_movements(acc.movements);
+  //display balance
+
+  calc_balance_print(acc);
+
+  //display summary
+
+  calc_display_summary(acc);
+};
 //compute user names:
 
 const user_name = function (full_name_arr) {
@@ -139,16 +154,65 @@ btnLogin.addEventListener('click', function (e) {
     //clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
 
-    //movments
-    display_movements(current_account.movements);
-    //display balance
-
-    calc_balance_print(current_account.movements);
-
-    //display summary
-
-    calc_display_summary(current_account);
+    update_ui(current_account);
   }
+});
+
+//TransfbtnTransferers.
+btnTransfer.addEventListener('click', function (e) {
+  e.preventDefault();
+  const transfer_amount = Number(inputTransferAmount.value);
+  const trasfer_account = accounts.find(
+    acc => acc.user_name === inputTransferTo.value
+  );
+  console.log(transfer_amount, trasfer_account);
+
+  if (
+    transfer_amount > 0 &&
+    trasfer_account &&
+    current_account.balance >= transfer_amount &&
+    trasfer_account.user_name !== current_account.user_name
+  ) {
+    //add movements
+    current_account.movements.push(-transfer_amount);
+    trasfer_account.movements.push(transfer_amount);
+    update_ui(current_account);
+  }
+  inputTransferTo.value = '';
+  inputTransferAmount.value = '';
+});
+
+//request loan
+btnLoan.addEventListener('click', function (e) {
+  e.preventDefault();
+  const loan_requested = Number(inputLoanAmount.value);
+
+  if (
+    loan_requested > 0 &&
+    current_account.movements.some(mov => mov > loan_requested * 0.1)
+  ) {
+    current_account.movements.push(loan_requested);
+  }
+  update_ui(current_account);
+  inputLoanAmount.value = '';
+});
+
+//closure of account
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  if (
+    current_account.user_name === inputCloseUsername.value &&
+    current_account?.pin === Number(inputClosePin.value)
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.user_name === current_account.user_name
+    );
+    accounts.splice(index, 1);
+    containerApp.style.opacity = 0;
+  }
+  inputTransferTo.value = '';
+  inputTransferAmount.value = '';
 });
 
 /////////////////////////////////////////////////
