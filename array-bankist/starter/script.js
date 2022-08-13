@@ -63,10 +63,14 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 console.log('in login page');
 
-const display_movements = function (movements) {
+const display_movements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
+  const move_check = sort ? movements.slice().sort((a, b) => a - b) : movements; //slice is used to create a copy of movements and this line is for sorting ascending order and display
 
-  movements.forEach(function (mov, i) {
+  console.log(movements);
+  console.log(move_check);
+
+  move_check.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = ` <div class="movements__row">
@@ -215,6 +219,14 @@ btnClose.addEventListener('click', function (e) {
   inputTransferAmount.value = '';
 });
 
+let sort_state = false;
+//handling sort
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  display_movements(current_account.movements, !sort_state);
+  sort_state = !sort_state; //coz this state will be used to check in display movements method
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -226,3 +238,53 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+//More array Practice
+//1. TO sum all movements
+const Sum_of_all_depos = accounts
+  .flatMap(val => val.movements)
+  .filter(val => val > 0)
+  .reduce((val, curr) => val + curr);
+
+console.log(Sum_of_all_depos);
+
+//2. NUM of depos > 1000.
+const num_of_depos_grt1000 = accounts
+  .flatMap(val => val.movements)
+  .filter(val => val > 1000).length;
+
+console.log(num_of_depos_grt1000);
+
+//3. Calculate depo and withdrawal and create aobject and put in it
+const sums = accounts
+  .flatMap(val => val.movements)
+  .reduce(
+    (sum, curr) => {
+      // curr > 0
+      //   ? (sum.deposits = sum.deposits + curr)
+      //   : (sum.withdrawals = sum.withdrawals + curr);
+
+      sum[curr > 0 ? 'deposits' : 'withdrawals'] += curr;
+      return sum;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(sums);
+
+//4, Conv with excptions---Ex : this is a heading  -- This is a Heading .
+
+const convert_title_case = function (title) {
+  const ecxeption = ['', 'an', 'is', 'the'];
+  const title_lower_split = title
+    .toLowerCase()
+    .split(' ')
+    .map(str =>
+      ecxeption.includes(str) ? str : str[0].toUpperCase() + str.slice(1)
+    )
+    .join(' ');
+  console.log(title_lower_split);
+};
+
+convert_title_case('this is a heading');
+//console.log(convert_title_case('this is a heading'));

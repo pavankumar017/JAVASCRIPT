@@ -48,11 +48,58 @@
 
 // console.log(calc_av_human_age([[1, 2, 3, 34, 3]]));
 
-//sort
-const move = [-123, -080, 878, 833, 564, -90];
-move.sort((a, b) => {
-  a - b;
-});
-console.log(move);
-console.log('hi');
-//op = [-080,-90,-123,564,833,878]
+// console.log('hi');
+
+//Final coding challenge.
+
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+];
+
+//1.
+const calc_reccomended_food = dogs => {
+  dogs.forEach(dog => {
+    dog.recc_food = Math.trunc(dog.weight ** 0.75 * 28);
+  });
+};
+
+calc_reccomended_food(dogs);
+console.log(dogs);
+
+//2.
+
+const find_sarah_dog = dogs.find(dog => dog.owners.includes('Sarah'));
+
+console.log(find_sarah_dog);
+console.log(
+  `Sarah dog is eating ${
+    find_sarah_dog.curFood > find_sarah_dog.recc_food ? 'TooMuch' : 'Less'
+  }`
+);
+
+//3.
+const owners_to_much = dogs
+  .filter(dogs => dogs.curFood > dogs.recc_food)
+  .flatMap(own => own.owners);
+console.log(owners_to_much);
+
+const owners_to_less = dogs
+  .filter(dogs => dogs.curFood < dogs.recc_food)
+  .flatMap(own => own.owners);
+console.log(owners_to_less);
+
+//4.
+console.log(`${owners_to_much.join(' and ')} dogs are eating too musc`);
+
+//5.
+console.log(dogs.every(dogs => dogs.recc_food === dogs.curFood));
+
+//6.
+let dogs_copy = dogs.slice();
+console.log(dogs_copy);
+
+dogs_copy.sort((a, b) => a.recc_food - b.recc_food);
+// console.log(dogs_copy);
