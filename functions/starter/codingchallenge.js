@@ -7,13 +7,14 @@ const poll = {
   answers: new Array(4).fill(0),
 };
 
-console.log(poll.answers[0]);
+console.log(poll.answers);
 //1 .
 poll.register_answer = function () {
   //1.1
   const a = prompt(`${poll.question} \n ${poll.options.join('\n')}
   (Write option number)
   `);
+  console.log('A', a);
   //1.2
   poll.answers[a] = poll.answers[a] + 1;
   console.log(poll);

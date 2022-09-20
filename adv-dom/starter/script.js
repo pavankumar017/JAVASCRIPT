@@ -84,6 +84,7 @@ container.addEventListener('click', function (e) {
 const handleHover = function (opacity) {
   // console.log(this);
   //aplied closure concept
+  //e is an event
   return function (e) {
     if (e.target.classList.contains('nav__link')) {
       const hovered_link = e.target;
@@ -127,3 +128,143 @@ const obsoptions = {
 
 const observer_api = new IntersectionObserver(obscalkback, obsoptions);
 observer_api.observe(document.querySelector('.header'));
+
+//reveal section
+const all_section = document.querySelectorAll('.section');
+
+const reveal_section = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+
+const section_observer = new IntersectionObserver(reveal_section, {
+  root: null,
+  threshold: 0.15,
+});
+
+all_section.forEach(function (section) {
+  // section.classList.add('section--hidden');
+  section_observer.observe(section);
+});
+
+//lazy loading
+const target_image = document.querySelectorAll('img[data-src]');
+
+const loadimg = function (entries, observer) {
+  const [entry] = entries;
+
+  if (!entry.isIntersecting) return;
+
+  //replace src with data set src
+  entry.target.src = entry.target.dataset.src;
+
+  //we want to have image after load
+  entry.target.addEventListener('load', function () {
+    entry.target.classList.remove('lazy-img');
+  });
+  observer.unobserve(entry.target);
+};
+
+const observe_img = new IntersectionObserver(loadimg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+console.log(observe_img);
+
+target_image.forEach(img => {
+  observe_img.observe(img);
+});
+
+//slider component
+
+const slides = document.querySelectorAll('.slide');
+const btn_right = document.querySelector('.slider__btn--right');
+const btn_left = document.querySelector('.slider__btn--left');
+
+const slider = document.querySelector('.slider');
+
+const dotcontainer = document.querySelector('.dots');
+
+// slider.style.transform = 'scale(0.3)'; this is just to reduce its size
+// slider.style.overflow = 'visible';
+
+let current_slide = 0;
+const max_slides = slides.length;
+
+const gotoslide = function (slidesin) {
+  slides.forEach((s, i) => {
+    s.style.transform = `translateX(${100 * (i - slidesin)}%)`;
+    //-100%, 0% ,100%
+  });
+};
+
+//dot creation function
+
+const create_dots = function () {
+  slides.forEach(function (_, i) {
+    dotcontainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class = "dots__dot" data-slide = "${i}"></button>`
+    );
+  });
+};
+
+const activateDot = function (dot) {
+  const dots = document.querySelectorAll('.dots__dot');
+  dots.forEach(d => d.classList.remove('dots__dot--active'));
+  console.log('dot', dot);
+  document
+    .querySelector(`.dots__dot[data-slide="${dot}"]`)
+    .classList.add('dots__dot--active');
+};
+
+create_dots();
+gotoslide(0); //this is for first default positions  //0%, 100% ,200%
+activateDot(0);
+
+const nextslide = function () {
+  //to have a condn when we click on last slides it should come back
+  if (current_slide === max_slides - 1) {
+    current_slide = 0; // when clicked on last slide right buttonit resets to 0 and comes to first slide
+  } else {
+    current_slide++;
+  }
+  gotoslide(current_slide);
+  activateDot(current_slide);
+};
+
+const prevslide = function () {
+  //here its oppsite to nextslide we have to decrease curret slide value and when its 0 set to max(3rd slide)
+  if (current_slide === 0) {
+    current_slide = max_slides - 1;
+  } else {
+    current_slide--;
+  }
+  gotoslide(current_slide);
+  activateDot(current_slide);
+};
+
+btn_right.addEventListener('click', nextslide);
+btn_left.addEventListener('click', prevslide);
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowRight') {
+    nextslide();
+  } else if (e.key === 'ArrowLeft') {
+    prevslide();
+  }
+});
+
+//adding evernt listners for dots - we used event propogation
+dotcontainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('dots__dot')) {
+    const slide = e.target.dataset.slide; // slide is the dataset name we have set
+    console.log(slide);
+    gotoslide(slide);
+    activateDot(slide);
+  }
+});

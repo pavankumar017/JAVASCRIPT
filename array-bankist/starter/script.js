@@ -149,7 +149,7 @@ btnLogin.addEventListener('click', function (e) {
   current_account = accounts.find(
     current_account => current_account.user_name === inputLoginUsername.value
   );
-  console.log(current_account);
+  console.log('curre_acc ', current_account);
   if (current_account?.pin === Number(inputLoginPin.value)) {
     //display ui and message
     labelWelcome.textContent = `Welcome ${current_account.owner.split(' ')[0]}`;

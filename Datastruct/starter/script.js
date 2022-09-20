@@ -18,7 +18,7 @@ const openingHours = {
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
-// Data needed for first part of the section
+// // Data needed for first part of the section
 const restaurant = {
   name: 'Classico Italiano',
   location: 'Via Angelo Tavanti 23, Firenze, Italy',
@@ -30,57 +30,57 @@ const restaurant = {
   openingHours,
 };
 
-//optionla chaining
-console.log(restaurant.openingHours.mon?.open);
+// //optionla chaining
+// console.log(restaurant.openingHours.mon?.open);
 
-//looping over objects
+// //looping over objects
 
-const props = Object.keys(openingHours);
-console.log(props);
+// const props = Object.keys(openingHours);
+// console.log(props);
 
-for (const days of props) console.log(days);
+// for (const days of props) console.log(days);
 
-// to get entries of objects
-const entries = Object.entries(openingHours);
-console.log(entries);
-for (const x of entries) console.log(x);
+// // to get entries of objects
+// const entries = Object.entries(openingHours);
+// console.log(entries);
+// for (const x of entries) console.log(x);
 
-// //Spread operator :
-// const new_arr = [...restaurant.mainMenu, ...restaurant.starterMenu];
-// console.log(...new_arr);
+//Spread operator :
+const new_arr = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log('spread', ...new_arr);
 
 //rest operator
-// const [s, a, ...others] = [...restaurant.starterMenu];
-// console.log(s);
-// console.log(a);
-// console.log(others);
+const [s, a, ...others] = [...restaurant.starterMenu];
+console.log(s);
+console.log(a);
+console.log(others);
 
 //short Circuiting OR
 
-// console.log('' || 'jonas');
-// console.log(true || 0);
-// console.log(undefined || 0 || 'hello' || null);
+console.log('' || 'jonas');
+console.log(true || 0);
+console.log(undefined || 0 || 'hello' || null);
 
-// const num = 0;
+const num = 0;
 
-// const guest = num || 0;
-// console.log(guest);
+const guest = num || 0;
+console.log(guest);
 
-// // shORT circuting AND
+// shORT circuting AND
 
-// console.log(0 && 1);
-// console.log(null && 'hello'); //False And True
+console.log(0 && 1);
+console.log(null && 'hello'); //False And True
 
 //OR assignment operator
-// const rest1 = {
-//   name: 'la cavina',
-//   numguest: 20,
-// };
-// const rest2 = {
-//   name: 'la avina',
-// };
+const rest1 = {
+  name: 'la cavina',
+  numguest: 20,
+};
+const rest2 = {
+  name: 'la avina',
+};
 
-// rest2.numguest |= 10; //Ths is same as rest2.numguest = rest2.numguest || 10.
+rest2.numguest |= 10; //Ths is same as rest2.numguest = rest2.numguest || 10.
 
 const game = {
   team1: 'Bayern Munich',
