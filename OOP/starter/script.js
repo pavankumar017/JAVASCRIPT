@@ -85,26 +85,29 @@ console.log(jesica);
 jesica.init('Jessica', 1996);
 console.log(jesica.calage());
 
-//inheritance bw two classed
+// //inheritance bw two classe
 
-class Person {
-  constructor(full_name, dob) {
-    this.full_name = full_name;
-    this.dob = dob;
-  }
+// class Person {
+//   constructor(full_name, dob) {
+//     this.full_name = full_name;
+//     this.dob = dob;
+//   }
 
-  calc_age() {
-    return 2037 - this.dob;
-  }
-}
+//   calc_age() {
+//     return 2037 - this.dob;
+//   }
+// }
 
-class Student extends Person {
-  constructor(full_name, dob, course) {
-    super(full_name, dob);
-    this.course = course;
-  }
-}
+// class Student extends Person {
+//   //this extends keywords is that creates a link
+//   constructor(full_name, dob, course) {
+//     // constrtor function is what as args passed
+//     super(full_name, dob);
+//     this.course = course;
+//   }
+// }
 
-const martha = new Student('Martha james', 2012, 'CS');
-console.log(martha);
-console.log(martha.calc_age());
+// const martha = new Student('Martha james', 2012, 'CS');
+// console.log(martha);
+// console.log(martha.calc_age());
+//

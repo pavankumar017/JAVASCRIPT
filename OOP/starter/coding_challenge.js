@@ -89,3 +89,5 @@ const Tesla = new EVCAR('tesla', 100, 25);
 console.log(Tesla);
 Tesla.charegto(50);
 console.log(Tesla);
+
+
